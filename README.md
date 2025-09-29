@@ -7,11 +7,11 @@ Esta aplicación, como se puede ver, es una lista de tareas.
 La interfaz de la aplicación es la siguiente: Está su título y el espacio donde se van a listar los elementos de una tabla con tareas, marcadas como pendientes o 
 completadas. <br/>
     Cada fila tiene sus elementos, estos son el ID para identificar el elemento, su título, descripción, y si fue completada o no, siendo por defecto la tarea marcada como no completada. <br/>
-    Se agregaron al diseño un icono acorde a la aplicacion (visible al levantar el server) y algunos estilos.
+    Se agregaron al diseño un icono acorde a la aplicación (visible al levantar el server) y algunos estilos.
 
 ## Estructura de la pagina
 
-Toda la aplicación se encuentra dentro de la carpeta server, dentro de ella está la carpeta "pages" que contiene la pagina principal (index.html) y el icono de la aplicación, por otro lado, en el mismo nivel de la carpeta antes mencionada hay dos archivos, "main.go" y "go.mod". <br/> El archivo "go.mod" muestra la raíz del modulo y la versión de go en la que se desarrolló el proyecto, pero de entre los dos el más importante es "main.go", ya que ejecutandolo se inicia el servidor de todo el proyecto. <br/><br/>
+Toda la aplicación se encuentra dentro de la carpeta server, dentro de ella está la carpeta "pages" que contiene la pagina principal (index.html) y el icono de la aplicación, por otro lado, en el mismo nivel de la carpeta antes mencionada hay dos archivos, "main.go" y "go.mod". <br/> El archivo "go.mod" muestra la raíz del modulo y la versión de go en la que se desarrolló el proyecto, pero de entre los dos el más importante es "main.go", ya que ejecutándolo se inicia el servidor de todo el proyecto. <br/><br/>
 
 Ahora considerando lo recientemente agregado.<br/>
 Junto a "pages" hay otra carpeta llamada "db" con sus subcarpetas "queries" (con un archivo con las operaciones permitidas sobre la base de datos), "schema" (con su archivo para la construcción de la tabla) y "sqlc" con el código Go seguro y tipado generado por el comando homónimo.<br/>
@@ -20,7 +20,7 @@ También, junto a la carpeta "db" se agregó un archivo "sqlc.yaml" para especif
 ## Como ejecutar el servidor
 
 ### Fijarse estado de Golang
-Lo primero que se debe hacer es fijarse si se tiene el lenguaje de programacion que corre el servidor instalado. El que ejecuta nuestro proyecto es [Golang](https://go.dev/). Para corrobarar la instalación o chequear si se tiene instalada una versión se debe ejecutar en la terminal (del sistema operativo que se tenga) el comando siguiente:
+Lo primero que se debe hacer es fijarse si se tiene el lenguaje de programación que corre el servidor instalado. El que ejecuta nuestro proyecto es [Golang](https://go.dev/). Para corroborar la instalación o chequear si se tiene instalada una versión se debe ejecutar en la terminal (del sistema operativo que se tenga) el comando siguiente:
 ```
 go version
 ```
@@ -35,5 +35,5 @@ go run .
 Luego de unos momentos, en el terminal aparecerá el mensaje `Servidor escuchando en http://localhost:8080`, para ver el proyecto solo se debe hacer click en el link generado.
 
 ### Detener el servidor
-Para apagar el servidor, solo se debe clickear en la terminal nuevamente y usar la convinacion de teclas Ctrl+Z, que matará el programa ejecutando.
+Para apagar el servidor, solo se debe clickear en la terminal nuevamente y usar la combinación de teclas Ctrl+Z, que terminará el programa ejecutando.
 
