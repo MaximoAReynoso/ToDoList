@@ -1,6 +1,6 @@
 version: "2"
 sql:
-  - engine: "postgresql"  # or "mysql", "sqlite"
+  - engine: "postgresql"
     queries: "./db/queries/"
     schema: "./db/schema/"
     gen:
