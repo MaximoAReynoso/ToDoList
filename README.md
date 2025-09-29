@@ -6,12 +6,12 @@ Esta aplicación, como se puede ver, es una lista de tareas.
 
 La interfaz de la aplicación es la siguiente: Está su título como se va arriba, y el espacio donde se van a listar los elementos de una tabla con tareas pendientes o 
 completadas. <br/>
-    Cada fila tiene sus elementos, estos son el ID para identificar el elemento, su título, descripción, y si fue completada o no, siendo por defecto la tarea marcada como no completada.
-    Se agrego al diseño un icono acorde a la aplicacion.
+    Cada fila tiene sus elementos, estos son el ID para identificar el elemento, su título, descripción, y si fue completada o no, siendo por defecto la tarea marcada como no completada. <br/>
+    Se agregaron al diseño un icono acorde a la aplicacion (visible al levantar el server) y algunos estilos.
 
 ## Como ejecutar el servidor
 
-### Fijarse estado del lenguaje de programacion del servidor
+### Fijarse estado de Golang
 Lo primero que se debe hacer es fijarse si se tiene el lenguaje de programacion que corre el servidor instalado. El que ejecuta nuestro proyecto es [Golang](https://go.dev/). Para corrobarar la instalación o chequear si se tiene instalada una versión se debe ejecutar en la terminal (del sistema operativo que se tenga) el comando siguiente:
 ```
 go version
