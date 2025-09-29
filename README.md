@@ -11,7 +11,11 @@ completadas. <br/>
 
 ## Estructura de la pagina
 
-Toda la aplicación se encuentra dentro de la carpeta server, dentro de ella está la carpeta "pages" que contiene la pagina principal (index.html) y el icono de la aplicación, por otro lado, en el mismo nivel de la carpeta antes mencionada hay dos archivos, "main.go" y "go.mod". <br/> El archivo "go.mod" muestra la raíz del modulo y la versión de go en la que se desarrolló el proyecto, pero de entre los dos el más importante es "main.go", ya que ejecutandolo se inicia el servidor de todo el proyecto. 
+Toda la aplicación se encuentra dentro de la carpeta server, dentro de ella está la carpeta "pages" que contiene la pagina principal (index.html) y el icono de la aplicación, por otro lado, en el mismo nivel de la carpeta antes mencionada hay dos archivos, "main.go" y "go.mod". <br/> El archivo "go.mod" muestra la raíz del modulo y la versión de go en la que se desarrolló el proyecto, pero de entre los dos el más importante es "main.go", ya que ejecutandolo se inicia el servidor de todo el proyecto. <br/><br/>
+
+Ahora considerando lo recientemente agregado.<br/>
+Junto a "pages" hay otra carpeta llamada "db" con sus subcarpetas "queries" (con un archivo con las operaciones permitidas sobre la base de datos), "schema" (con su archivo para la construcción de la tabla) y "sqlc" con el código Go seguro y tipado generado por el comando homónimo.<br/>
+También, junto a la carpeta "db" se agregó un archivo "sqlc.yaml" para especificar las variables con las que se va a ejecutar dicho comando.
 
 ## Como ejecutar el servidor
 
