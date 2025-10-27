@@ -1,4 +1,4 @@
-/*document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     load();
 
     const formulario = document.getElementById('formulario');
@@ -22,34 +22,62 @@ async function cargarContenido(contenido) {
     lista.innerHTML = "";
 
     contenido.forEach(element => {
-        const el = document.createElement('div');
+        const contenedor = document.createElement('div');
+        contenedor.classList.add('elementoDeLista');
 
+        const titulo = document.createElement('p');
+        titulo.textContent = element.title;
+        titulo.style.fontWeight = 'bold';
+
+        const descripcion = document.createElement('p');
+        descripcion.textContent = element.description;
+
+        const completada = document.createElement('p');
+        completada.textContent = element.completed == true? "Completado" : "No completado";
+
+        const botonBorrar = document.createElement('button');
+        botonBorrar.classList.add('botonBorrar');
+        botonBorrar.type = 'submit';
+        botonBorrar.textContent = 'Borrar';
+        botonBorrar.addEventListener('click', async () => {
+            await deleteTask(contenedor.id);
+            await load();
+        });
+
+        contenedor.appendChild(titulo);
+        contenedor.appendChild(descripcion);
+        contenedor.appendChild(completada);
+        contenedor.appendChild(botonBorrar);
+        lista.appendChild(contenedor);
     });
-}*/
+}
 
-const lista = document.getElementById("listaElementos");
-for (let index = 0; index < 4; index++) {
-    const contenedor = document.createElement('div');
-    contenedor.classList.add('elementoDeLista');
+async function postTask(event) {
+    event.preventDefault();
 
-    const titulo = document.createElement('p');
-    titulo.textContent = 'Titulo';
-    titulo.style.fontWeight = 'bold';
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const button = document.getElementById('checked').value;
+    const valores = {title, description, button};
 
-    const descripcion = document.createElement('p');
-    descripcion.textContent = 'Descripcion';
+    try {
+        const res = await fetch('/tasks', {method: 'POST', body: JSON.stringify(valores)});
+        if (!res.ok) throw new Error('No se pudo crear');
 
-    const completada = document.createElement('p');
-    completada.textContent = 'Completada';
+        event.target.reset();
+        await load();
+        console.log('Se creo el task');
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-    const botonBorrar = document.createElement('button');
-    botonBorrar.classList.add('botonBorrar');
-    botonBorrar.type = 'submit';
-    botonBorrar.textContent = 'Borrar';
-
-    contenedor.appendChild(titulo);
-    contenedor.appendChild(descripcion);
-    contenedor.appendChild(completada);
-    contenedor.appendChild(botonBorrar);
-    lista.appendChild(contenedor);
+async function deleteTask(id) {
+    try {
+        const res = await fetch('/tasks/${id}', {method: 'DELETE'});
+        if (!res.ok) throw new Error('No se pudo borrar');
+        console.log('Se elimino el task de id: ${id}');
+    } catch (error) {
+        console.log(error);
+    }
 }
