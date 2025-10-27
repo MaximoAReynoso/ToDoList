@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>To-Do List</title>
-    <style>
-        h1 {
-            text-align: center; 
-            background-color: silver; 
-            border-radius: 10px;
-        }
-
-        p {
-            padding: 5px;
-            border-style: solid; 
-            border-color: black; 
-            border-width: 2px; 
-            border-radius: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Se pusieron de momento los estilos en el archivo index, despues irán en su archivo -->
     <h1>To-Do List</h1>
 
-    <p>
-        Esta aplicación, como se puede ver, es una lista de tareas. <br><br>
-        La interfaz de la aplicación es la siguiente: Está su título como se va arriba, y el 
-        espacio donde se van a listar los elementos de una tabla con tareas pendientes o 
-        completadas. <br> Cada fila tiene sus elementos, estos son el ID para identificar el
-        elemento, su título, descripción, y si fue completada o no, siendo por defecto la tarea
-        marcada como no completada.
-    </p>
+    <form action="#" method="post" id="formulario">
+        <div class="formBoxes">
+            <p class="formText">Titulo</p>
+            <input type="text" name="title" class="formInput" /><br />
+        </div>
+
+        <div class="formBoxes">
+            <p class="formText">Descripción</p>
+            <input type="text" name="description" class="formInput" required /><br />
+        </div>
+
+        <div class="formCompleted">
+            <p class="formText">Completada</p>
+            <input type="checkbox" id="checked" name="completed" value="true" class="checked" />
+        </div>
+        <button type="submit" class="boton">Enviar</button>
+    </form>
+
+    <div id="listaElementos" class="listaElementos"></div>
+    <script src="app.js"></script>
 </body>
 </html>
