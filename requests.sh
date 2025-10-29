@@ -1,42 +1,36 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 set -e
 
-API_URL="http://localhost:8080/tasks"
+URL="http://localhost:8080/tasks"
 
-echo "-----------------------------"
-echo "Creating a task..."
-response=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$API_URL" \
+echo "Creando task..."
+res=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$URL" \
   -H "Content-Type: application/json" \
   -d '{
     "title": "Ejemplo",
     "description": "Ejemplo description",
     "completed": false
   }')
-echo "Status: $response (Expected: 201)"
-echo "-----------------------------"
+echo -e "Resultado: $res (Caso exitoso: 201)\n\n"
 
-echo "Getting all tasks..."
-curl -s -X GET "$API_URL" -i
-echo "-----------------------------"
+echo "Obteniendo todos los tasks..."
+curl -s -X GET "$URL" -i
+echo -e "\n\n"
 
-echo "Getting task with id 1..."
-curl -s -X GET "$API_URL/1" -i
-echo "-----------------------------"
+echo "Obteniendo task con ID = 1..."
+curl -s -X GET "$URL/1" -i
+echo -e "\n\n"
 
-echo "Updating task with id 1..."
-response=$(curl -s -o /dev/null -w "%{http_code}" -X PUT "$API_URL/1" \
+echo "Actualizando task con ID = 1..."
+res=$(curl -s -o /dev/null -w "%{http_code}" -X PUT "$URL/1" \
   -H "Content-Type: application/json" \
   -d '{
     "title": "Ejemplo (modificado)",
     "description": "Ejemplo description actualizada",
     "completed": true
   }')
-echo "Status: $response (Expected: 200)"
-echo "-----------------------------"
+echo -e "Resultado: $res (Resultado exitoso: 200)\n\n"
 
-echo "Deleting task with id 1..."
-response=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE "$API_URL/1")
-echo "Status: $response (Expected: 204)"
-echo "-----------------------------"
-
-echo "Done!"
+echo "Eliminando task con ID = 1..."
+res=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE "$URL/1")
+echo -e "Resultado: $res (Resultado exitoso: 204)\n\n"
