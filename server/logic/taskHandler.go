@@ -9,7 +9,6 @@ import (
 
 // Manejador para /elements y /elements/{id}
 func (s *Server) ElementHandler(w http.ResponseWriter, r *http.Request) {
-	// Extraer ID del path
 	parts := strings.Split(r.URL.Path, "/")
 
 	if len(parts) != 3 {
