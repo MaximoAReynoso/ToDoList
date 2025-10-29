@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 const createTask = `-- name: CreateTask :one
@@ -15,9 +14,9 @@ INSERT INTO task (title, description, completed) VALUES ($1, $2, $3) RETURNING i
 `
 
 type CreateTaskParams struct {
-	Title       string       `json:"title"`
-	Description string       `json:"description"`
-	Completed   sql.NullBool `json:"completed"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Completed   bool   `json:"completed"`
 }
 
 func (q *Queries) CreateTask(ctx context.Context, arg CreateTaskParams) (Task, error) {

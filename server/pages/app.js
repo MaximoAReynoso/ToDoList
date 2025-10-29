@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     load();
 
     const formulario = document.getElementById('formulario');
-    formulario.addEventListener('submit', Enviar());
+    formulario.addEventListener('submit', postTask);
 });
 
 async function load() {
@@ -11,7 +11,7 @@ async function load() {
         if (!contenido.ok) throw new Error('No se pudo cargar.');
 
         const elementos = await contenido.json();
-        cargarContenido(contenido);
+        cargarContenido(elementos);
     } catch (error) {
         console.log(error);
     }
@@ -20,6 +20,11 @@ async function load() {
 async function cargarContenido(contenido) {
     const lista = document.getElementById("listaElementos");
     lista.innerHTML = "";
+
+    if (!contenido){
+        console.error("Nada que cargar.");
+        return;
+    }
 
     contenido.forEach(element => {
         const contenedor = document.createElement('div');
@@ -40,7 +45,7 @@ async function cargarContenido(contenido) {
         botonBorrar.type = 'submit';
         botonBorrar.textContent = 'Borrar';
         botonBorrar.addEventListener('click', async () => {
-            await deleteTask(contenedor.id);
+            await deleteTask(element.id);
             await load();
         });
 
@@ -54,14 +59,14 @@ async function cargarContenido(contenido) {
 
 async function postTask(event) {
     event.preventDefault();
+    const formulario = document.getElementById('formulario');
 
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-    const button = document.getElementById('checked').value;
-    const valores = {title, description, button};
+    const formData = new FormData(formulario);
+    const data = Object.fromEntries(formData.entries());
+    data.completed = formulario.querySelector('input[name="completed"]').checked;
 
     try {
-        const res = await fetch('/tasks', {method: 'POST', body: JSON.stringify(valores)});
+        const res = await fetch('/tasks', {method: 'POST', body: JSON.stringify(data)});
         if (!res.ok) throw new Error('No se pudo crear');
 
         event.target.reset();
@@ -74,7 +79,7 @@ async function postTask(event) {
 
 async function deleteTask(id) {
     try {
-        const res = await fetch('/tasks/${id}', {method: 'DELETE'});
+        const res = await fetch(`/tasks/${id}`, {method: 'DELETE'});
         if (!res.ok) throw new Error('No se pudo borrar');
         console.log('Se elimino el task de id: ${id}');
     } catch (error) {

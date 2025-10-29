@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+    db:
+        image: postgres:16
+        container_name: postgres_db
+        restart: always
+        environment:
+            POSTGRES_USER: user
+            POSTGRES_PASSWORD: pass
+            POSTGRES_DB: database
+        ports:
+            - "5432:5432"
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U user -d tasksdb"]
+            interval: 5s
+            timeout: 2s
+            retries: 5
+        volumes:
+            - ./server/db/schema:/docker-entrypoint-initdb.d
+            - postgres_data:/var/lib/postgresql/data
+    
+    app:
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+            args:
+                GOPROXY: direct
+        container_name: go_app
+        depends_on:
+            db:
+                condition: service_healthy
+        environment:
+            DB_HOST: db
+            DB_PORT: 5432
+            DB_USER: user
+            DB_PASSWORD: pass
+            DB_NAME: database
+        ports:
+            - "8080:8080"
+
+
+volumes:
+    postgres_data:

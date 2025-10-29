@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	connStr := "user=u password=p dbname=d"
+	connStr := "user=user password=pass dbname=database host=db port=5432 sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatalf("failed to connect to DB: %v", err)
@@ -25,6 +25,7 @@ func main() {
 	fileServer := http.FileServer(http.Dir(index))
 	http.Handle("/", fileServer)
 	http.Handle("/tasks", logic.LoggingMiddleware(http.HandlerFunc(server.ElementHandler)))
+	http.Handle("/tasks/", logic.LoggingMiddleware(http.HandlerFunc(server.ElementHandler)))
 
 	port := ":8080"
 	fmt.Printf("Servidor escuchando en http://localhost%s\n", port)

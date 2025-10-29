@@ -58,13 +58,17 @@ func (s *Server) CreateTasks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	task := Task{
-		Title:       newTask.Title,
-		Description: newTask.Description,
-		Completed:   newTask.Completed.Bool,
+	err = ValidateTask(newTask.Title)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
 
-	err = ValidateTask(task)
+	dbTask, err := s.queries.CreateTask(context.Background(), sqlc.CreateTaskParams{
+		Title:       newTask.Title,
+		Description: newTask.Description,
+		Completed:   newTask.Completed,
+	})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -75,7 +79,8 @@ func (s *Server) CreateTasks(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(newTask)
+	json.NewEncoder(w).Encode(dbTask)
+
 }
 
 // PUT /tasks/{id} - Actualizar elemento

@@ -24,7 +24,7 @@ func (s *Server) ElementHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		id, err := strconv.Atoi(parts[2])
 		if err != nil {
-			http.Error(w, "Invalid product ID", http.StatusBadRequest)
+			http.Error(w, "Invalid task ID", http.StatusBadRequest)
 			return
 		}
 

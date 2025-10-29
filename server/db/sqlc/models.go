@@ -4,13 +4,9 @@
 
 package db
 
-import (
-	"database/sql"
-)
-
 type Task struct {
-	ID          int32        `json:"id"`
-	Title       string       `json:"title"`
-	Description string       `json:"description"`
-	Completed   sql.NullBool `json:"completed"`
+	ID          int32  `json:"id"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Completed   bool   `json:"completed"`
 }
