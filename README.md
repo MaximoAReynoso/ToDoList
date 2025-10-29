@@ -7,7 +7,7 @@ Esta aplicación, como se puede ver, es una lista de tareas.
 La interfaz de la aplicación es la siguiente: Está su título como se va arriba, y el espacio donde se van a listar los elementos de una tabla con tareas pendientes o 
 completadas. Con un recuadro fijo en la esquina de la pantalla, siendo la plantilla a completar para generar la nueva tarea.<br/>
 Cada tarea generada tiene sus elementos visibles, estos son su título, descripción, y si fue completada o no, siendo por defecto la tarea marcada como no completada. Tienen un elemento no visible pero presente en la base de datos que es su identificador o ID, generado automaticamente de manera incremental.<br/>
-Se agrego al diseño un icono acorde a la aplicacion.
+Se agrego al diseño un icono acorde a la aplicación.
 
 ## Estructura de la pagina
 
@@ -16,14 +16,14 @@ Toda la aplicación se encuentra dentro de la carpeta server, dentro de ella est
 Junto a "pages" hay otra carpeta llamada "db" con sus subcarpetas "queries" (con un archivo con las operaciones permitidas sobre la base de datos), "schema" (con su archivo para la construcción de la tabla) y "sqlc" con el código Go seguro y tipado generado por el comando homónimo al iniciar el programa.<br/>
 También, junto a la carpeta "db" se agregó un archivo "sqlc.yaml" para especificar las variables con las que se va a ejecutar dicho comando.<br/><br/>
 
-La carpeta logic adyacente a las anteriores contiene los conectores y operaciones necesarias para la interaccion entre la base de datos y el servidor. Todo lo anterior engloba el contenido de la carpeta server, junto con el `Dockerfile` utilizado en el montado de la aplicacion.<br/><br/>
+La carpeta logic adyacente a las anteriores contiene los conectores y operaciones necesarias para la interacción entre la base de datos y el servidor. Todo lo anterior engloba el contenido de la carpeta server, junto con el `Dockerfile` utilizado en el montado de la aplicación.<br/><br/>
 
-Por fuera de /server, esta el archivo de testeo `request.sh`, `docker-compose.yml` encargado de maquetar como se debe conteinearizar el programa entero y el ejecutable que levanta la aplicacion `runtest.sh`.
+Por fuera de /server, esta el archivo de testeo `request.sh`, `docker-compose.yml` encargado de maquetar como se debe conteinearizar el programa entero y el ejecutable que levanta la aplicación `runtest.sh`.
 
-## Como ejecutar la aplicacion
+## Como ejecutar la aplicación
 
-### Fijarse estado del lenguaje de programacion del servidor
-Lo primero que se debe hacer es fijarse si se tiene el lenguaje de programacion que corre el servidor instalado. El que ejecuta nuestro proyecto es [Golang](https://go.dev/). Para corrobarar la instalación o chequear si se tiene instalada una versión se debe ejecutar en la terminal (del sistema operativo que se tenga) el comando siguiente:
+### Fijarse estado del lenguaje de programación del servidor
+Lo primero que se debe hacer es fijarse si se tiene el lenguaje de programación que corre el servidor instalado. El que ejecuta nuestro proyecto es [Golang](https://go.dev/). Para corrobarar la instalación o chequear si se tiene instalada una versión se debe ejecutar en la terminal (del sistema operativo que se tenga) el comando siguiente:
 ```
 go version
 ```
@@ -36,14 +36,14 @@ docker version
 ```
 En caso de no tener una respecta satisfactoria, se puede instalar la herramienta desde su pagina [oficial](https://docs.docker.com/engine/install/) siguiendo las instrucciones correspondientes a su sistema operativo.
 
-### Ejecutar la aplicacion
-Ahora con el lenguaje y herramienta instalados ya podemos ejecutar la aplicacion. Se provee un archivo ejecutable llamado runtest.sh, todo lo que se debe hacer para montar y empezar a usar es ejecutar dicho archivo:
+### Ejecutar la aplicación
+Ahora con el lenguaje y herramienta instalados ya podemos ejecutar la aplicación. Se provee un archivo ejecutable llamado runtest.sh, todo lo que se debe hacer para montar y empezar a usar es ejecutar dicho archivo:
 ```
 ./runtest.sh
 ```
-Con la iniciacion correcta, se muestra todo el proceso de montado y testeo. Para ver el proyecto en el navegador solo se debe clickear en el link generado al final del proyecto.
+Con la iniciación correcta, se muestra todo el proceso de montado y testeo. Para ver el proyecto en el navegador solo se debe clickear en el link generado al final del proyecto.
 
-### Detener la aplicacion
+### Detener la aplicación
 Para apagar el servidor, solo se debe clickear en la terminal nuevamente y usar siguiente comando, que dentendrá y eliminará lo generado al iniciar el ejecutable:
 ```
 docker compose down -v
