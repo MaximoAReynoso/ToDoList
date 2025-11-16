@@ -22,6 +22,7 @@ func main() {
 	server := logic.NewServer(queries)
 
 	http.Handle("/", logic.LoggingMiddleware(http.HandlerFunc(server.GetTasks)))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.Handle("/tasks", logic.LoggingMiddleware(http.HandlerFunc(server.ElementHandler)))
 	http.Handle("/tasks/", logic.LoggingMiddleware(http.HandlerFunc(server.ElementHandler)))
 
