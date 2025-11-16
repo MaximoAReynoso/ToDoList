@@ -5,12 +5,9 @@ URL="http://localhost:8080/tasks"
 
 echo "Creando task..."
 res=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$URL" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Ejemplo",
-    "description": "Ejemplo description",
-    "completed": false
-  }')
+  -d "title=Ejemplo" \
+  -d "description=Ejemplo description" \
+  -d "completed=false")
 echo -e "Resultado: $res (Caso exitoso: 201)\n\n"
 
 echo "Obteniendo todos los tasks..."
@@ -23,12 +20,9 @@ echo -e "\n\n"
 
 echo "Actualizando task con ID = 1..."
 res=$(curl -s -o /dev/null -w "%{http_code}" -X PUT "$URL/1" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Ejemplo (modificado)",
-    "description": "Ejemplo description actualizada",
-    "completed": true
-  }')
+  -d "title=Ejemplo (modificado)" \
+  -d "description=Ejemplo description actualizada" \
+  -d "completed=true")
 echo -e "Resultado: $res (Resultado exitoso: 200)\n\n"
 
 echo "Eliminando task con ID = 1..."

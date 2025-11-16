@@ -1,0 +1,21 @@
+package views
+
+templ Formulario(){
+	<form action="/tasks" method="POST">
+        <div class="formBoxes">
+            <p class="formText">Titulo</p>
+            <input type="text" name="title" class="formInput" /><br />
+        </div>
+
+        <div class="formBoxes">
+            <p class="formText">Descripción</p>
+            <input type="text" name="description" class="formInput" required /><br />
+        </div>
+
+        <div class="formCompleted">
+            <p class="formText">Completada</p>
+            <input type="checkbox" name="completed" value="true" class="checked" />
+        </div>
+        <button type="submit" class="boton">Enviar</button>
+    </form>
+}

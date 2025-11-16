@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	sqlc "example.com/server/db/sqlc" // generado por sqlc
+	"example.com/server/views"
 )
 
 var mu sync.Mutex
@@ -23,64 +24,54 @@ func NewServer(queries *sqlc.Queries) *Server {
 
 // GET /tasks - Listar todos los elementos
 func (s *Server) GetTasks(w http.ResponseWriter, r *http.Request) {
-	tasks, _ := s.queries.ListTasks(context.Background())
+	tasks, _ := s.queries.ListTasks(r.Context())
 
-	w.Header().Set("Content-Type", "application/json")
-	mu.Lock()
-	defer mu.Unlock()
-	json.NewEncoder(w).Encode(tasks)
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	views.Index(tasks).Render(r.Context(), w)
 }
 
 // GET /tasks/{id} - Obtener elemento específico
 func (s *Server) GetTask(w http.ResponseWriter, r *http.Request, id int) {
-	task, err := s.queries.GetTask(context.Background(), int32(id))
+	task, err := s.queries.GetTask(r.Context(), int32(id))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
-
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-
-	mu.Lock()
-	defer mu.Unlock()
-
-	json.NewEncoder(w).Encode(task)
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	views.Index([]sqlc.Task{task}).Render(r.Context(), w)
 }
 
 // POST /tasks - Crear nuevo elemento
 func (s *Server) CreateTasks(w http.ResponseWriter, r *http.Request) {
-	var newTask sqlc.CreateTaskParams
-
-	err := json.NewDecoder(r.Body).Decode(&newTask)
+	err := r.ParseForm()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	err = ValidateTask(newTask.Title)
+	title := r.FormValue("title")
+	description := r.FormValue("description")
+	completedText := r.FormValue("completed")
+	completed := completedText == "on"
+
+	err = ValidateTask(title)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	dbTask, err := s.queries.CreateTask(context.Background(), sqlc.CreateTaskParams{
-		Title:       newTask.Title,
-		Description: newTask.Description,
-		Completed:   newTask.Completed,
+	_, err = s.queries.CreateTask(r.Context(), sqlc.CreateTaskParams{
+		Title:       title,
+		Description: description,
+		Completed:   completed,
 	})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	mu.Lock()
-	defer mu.Unlock()
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(dbTask)
-
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
 // PUT /tasks/{id} - Actualizar elemento

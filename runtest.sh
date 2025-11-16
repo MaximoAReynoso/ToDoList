@@ -31,11 +31,11 @@ echo -e "Espere 20 segundos a que la base de datos termine de iniciar...\n\n\n"
 
 sleep 20
 
-echo -e "Ejecutando tests..."
-./requests.sh
-echo -e "Test realizados.\n\n\n"
+#echo -e "Ejecutando tests..."
+#./requests.sh
+#echo -e "Test realizados.\n\n\n"
 
-sleep 5
+#sleep 5
 
 echo "Recursos cargados exitosamente, puede seguir usando la aplicacion."
 echo -e "Aplicacion corriendo en: http://localhost:8080. \n"

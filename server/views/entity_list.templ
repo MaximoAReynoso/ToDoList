@@ -1,0 +1,28 @@
+package views
+
+import (
+	sqlc "example.com/server/db/sqlc"
+)
+
+templ Listado(tasks []sqlc.Task){
+	<div id="listaElementos" class="listaElementos">
+		for _, task := range tasks {
+			<div class="elementoDeLista">
+				<p class="titulo"> { task.Title } </p>
+				<p class="descripcion"> { task.Description } </p>
+				if task.Completed {
+				    <p class="completada">Completado</p>
+				} else {
+				    <p class="completada">No completado</p>
+				}
+				<button type="submit" class="botonBorrar" onclick={ templ.JSFuncCall("deleteTask", task.ID) }>Borrar</button>
+			</div>
+		}
+	</div>
+	<script>
+    	async function deleteTask(id) {
+        	await fetch(`/tasks/${id}`, { method: 'DELETE' });
+        	location.reload();
+    	}
+    </script>
+}

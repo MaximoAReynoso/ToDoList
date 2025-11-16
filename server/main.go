@@ -21,9 +21,7 @@ func main() {
 	queries := sqlc.New(db)
 	server := logic.NewServer(queries)
 
-	index := "./pages"
-	fileServer := http.FileServer(http.Dir(index))
-	http.Handle("/", fileServer)
+	http.Handle("/", logic.LoggingMiddleware(http.HandlerFunc(server.GetTasks)))
 	http.Handle("/tasks", logic.LoggingMiddleware(http.HandlerFunc(server.ElementHandler)))
 	http.Handle("/tasks/", logic.LoggingMiddleware(http.HandlerFunc(server.ElementHandler)))
 

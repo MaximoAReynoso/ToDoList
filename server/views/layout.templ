@@ -1,0 +1,17 @@
+package views
+
+templ Layout(titulo string, contenido1 templ.Component, contenido2 templ.Component){
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="UTF-8">
+	    <title> { titulo } </title>
+	    <link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+    	<h1>{ titulo }</h1>
+        @contenido1
+        @contenido2
+	</body>
+	</html>
+}

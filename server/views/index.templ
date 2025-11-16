@@ -1,0 +1,12 @@
+package views
+
+import (
+    sqlc "example.com/server/db/sqlc"
+)
+
+templ Index(tasks []sqlc.Task) {
+    @Layout("To-Do List", 
+        Formulario(),
+        Listado(tasks),
+    )
+}
