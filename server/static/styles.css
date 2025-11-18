@@ -1,3 +1,5 @@
+/*================== Parte del titulo ==================*/
+
 h1 {
     margin-top: 0%;
     height: 10vh;
@@ -8,68 +10,85 @@ h1 {
 
     font-family: sans-serif;
     font-size: 6vh;
+    font-weight: bold;
     text-align: center;
+    color: white;
     cursor: default;
 }
 
+/*================== Parte del form ==================*/
+
 form {
     position: fixed;
-    background-color: darkgray;
-    text-align: center;
+    padding: 20px;
+    bottom: 3vh;
+    right: 3vw;
+    width: 24vw;
 
-    width: 30%;
-    height: 35%;
-    border-radius: 1vh;
+    max-width: 350px;
+    min-width: 220px;
 
-    left: 68%;
-    box-shadow: 3px 3px 3px 3px darkgrey;
+    background: white;
+
+    border-radius: 12px;
+    box-shadow: 0 4px 15px black;
+
+    font-family: sans-serif;
 }
 
-.formBoxes {
+.formText {
+    display: block;
+    margin-top: 0.8vh;
+    margin-bottom: 0.4vh;
+    cursor: default;
+
+    font-size: 3vh;
+    font-family: sans-serif;
+}
+
+.formInput {
+    width: 100%;
+    padding: 10px;
+    margin: 1vh 0;
+    resize: none;
+    gap: 0.8vh;
+
+    border-radius: 1vh;
+    border: 1px solid gray;
+
+    font-size: 2.2vh;
+    box-sizing: border-box;
     font-family: sans-serif;
 }
 
 .formCompleted {
-    position: absolute;
-    width: 30%;
-    margin-top: 1vh;
-    margin-left: 15%;
-}
-
-.formText {
-    position: static;
-    font-weight: bold;
-    margin-top: 1vh;
-    cursor: default;
-}
-
-.formInput {
-    position: absolute;
-    margin-top: -2vh;
-    left: 10%;
-
-    width: 80%;
-    text-align: center;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8vh;
 }
 
 .checked {
-    position: absolute;
-    width: 3vh;
-    height: 3vh;
-
-    margin-top: -10px;
-    left: 40%;
+    margin-top: 1.8vh;
     cursor: pointer;
 }
 
 .boton {
-    width: 10vh;
-    height: 5vh;
+    width: 100%;
+    padding: 1.5vh;
+    margin-top: 1.5vh;
 
-    margin-left: 50%;
-    margin-top: 3vh;
+    background: gray;
+    border: none;
+    border-radius: 1vh;
+
+    font-size: 3vh;
+    font-weight: bold;
+    color: white;
     cursor: pointer;
 }
+
+/*================== Parte del listado ==================*/
 
 .listaElementos {
     display: grid;
@@ -78,29 +97,43 @@ form {
 }
 
 .elementoDeLista {
-    background-color: silver;
-    width: 100%;
-    height: 25vh;
+    padding: 3vh;
+    margin: 3vh auto;
+
+    background-color: #f2f2f2;
+    max-width: 90vw;
+    height: 40vh;
 
     font-family: sans-serif;
-    font-size: 3vh;
 
     border-radius: 1vh;
+    border: 0.2vh solid #d4d4d4;
 }
 
 .elementoDeLista > p {
-    margin-left: 2vh;
+    background-color: #e5e5e5;
+
+    padding: 1.5vh 2vh;
+    margin: 1.6vh 0;
+
+    font-size: 3vh;
+    overflow-wrap: break-word;
+
+    border-radius: 1vh;
+    border-left: 0.6vh solid #b5b5b5;
 }
 
 .botonBorrar {
-    position: absolute;
-    width: 10vh;
-    height: 5vh;
-    margin-left: 15%;
-    margin-top: -7vh;
+    padding: 1.6vh 2.4vh;
+    margin: 2vh auto;
 
     background-color: red;
-    border-color: red;
+    border: none;
     border-radius: 1vh;
+
+    font-size: 3vh;
+    font-weight: bold;
+    color: white;
+
     cursor: pointer;
 }

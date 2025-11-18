@@ -29,7 +29,7 @@ func Formulario() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<form action=\"/tasks\" method=\"POST\"><div class=\"formBoxes\"><p class=\"formText\">Titulo</p><input type=\"text\" name=\"title\" class=\"formInput\"><br></div><div class=\"formBoxes\"><p class=\"formText\">Descripción</p><input type=\"text\" name=\"description\" class=\"formInput\" required><br></div><div class=\"formCompleted\"><p class=\"formText\">Completada</p><input type=\"checkbox\" name=\"completed\" value=\"true\" class=\"checked\"></div><button type=\"submit\" class=\"boton\">Enviar</button></form>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<form action=\"/tasks\" method=\"POST\"><div class=\"formBoxes\"><p class=\"formText\">Titulo</p><input type=\"text\" name=\"title\" class=\"formInput\"><br></div><div class=\"formBoxes\"><p class=\"formText\">Descripción</p><input type=\"text\" name=\"description\" class=\"formInput\" maxlength=\"255\" required><br></div><div class=\"formCompleted\"><p class=\"formText\">Completada</p><input type=\"checkbox\" name=\"completed\" value=\"true\" class=\"checked\"></div><button type=\"submit\" class=\"boton\">Enviar</button></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

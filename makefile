@@ -1,0 +1,33 @@
+all: sqlc build imagen levantar fin
+
+sqlc:
+	@printf "Aplicando sqlc...\n"
+	@cd server && sqlc generate
+	@printf "Sqlc generado.\n\n\n"
+	@sleep 2
+
+build:
+	@printf "Construyendo app...\n"
+	@cd server && go build -o exe .
+	@printf "App construida.\n\n\n"
+	@sleep 2
+
+imagen:
+	@printf "Compilando imagen Docker...\n"
+	@docker compose build --no-cache
+	@printf "Imagen compilada.\n\n\n"
+	@sleep 2
+
+levantar:
+	@printf "Levantando Docker...\n"
+	@docker compose up -d
+	@printf "Docker levantado.\n"
+	@printf "Espere 20 segundos a que la base de datos termine de iniciar...\n\n\n"
+	@sleep 20
+
+fin:
+	@printf "Recursos cargados exitosamente, puede seguir usando la aplicacion.\n"
+	@printf "Aplicacion corriendo en: http://localhost:8080.\n"
+
+off:
+	@docker compose down
