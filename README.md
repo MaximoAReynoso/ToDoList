@@ -11,14 +11,16 @@ Se agrego al diseño un icono acorde a la aplicación.
 
 ## Estructura de la pagina
 
-Toda la aplicación se encuentra dentro de la carpeta server, dentro de ella está la carpeta "pages" que contiene los elementos estaticos, por otro lado, en el mismo nivel de la carpeta antes mencionada hay dos archivos, "main.go" y "go.mod". <br/> El archivo "go.mod" muestra la raíz del modulo y la versión de go en la que se desarrolló el proyecto, pero de entre los dos el más importante es "main.go", ya que ejecutándolo se inicia el servidor de todo el proyecto. <br/><br/>
+Toda la aplicación se encuentra dentro de la carpeta server, dentro de ella está la carpeta "static" que contiene los elementos estaticos, por otro lado, en el mismo nivel de la carpeta antes mencionada hay dos archivos, "main.go" y "go.mod". <br/> El archivo "go.mod" muestra la raíz del modulo y la versión de go en la que se desarrolló el proyecto, pero de entre los dos el más importante es "main.go", ya que ejecutándolo se inicia el servidor de todo el proyecto. <br/><br/>
 
-Junto a "pages" hay otra carpeta llamada "db" con sus subcarpetas "queries" (con un archivo con las operaciones permitidas sobre la base de datos), "schema" (con su archivo para la construcción de la tabla) y "sqlc" con el código Go seguro y tipado generado por el comando homónimo al iniciar el programa.<br/>
+Junto a "static" hay otra carpeta llamada "db" con sus subcarpetas "queries" (con un archivo con las operaciones permitidas sobre la base de datos), "schema" (con su archivo para la construcción de la tabla) y "sqlc" con el código Go seguro y tipado generado por el comando homónimo al iniciar el programa.<br/>
 También, junto a la carpeta "db" se agregó un archivo "sqlc.yaml" para especificar las variables con las que se va a ejecutar dicho comando.<br/><br/>
 
 La carpeta logic adyacente a las anteriores contiene los conectores y operaciones necesarias para la interacción entre la base de datos y el servidor. Todo lo anterior engloba el contenido de la carpeta server, junto con el `Dockerfile` utilizado en el montado de la aplicación.<br/><br/>
 
-Por fuera de /server, esta el archivo de testeo `request.sh`, `docker-compose.yml` encargado de maquetar como se debe conteinearizar el programa entero y el ejecutable que levanta la aplicación `runtest.sh`.
+Por ultimo, views, con archivos templ que al compilarse generan ahi mismo los archivos golang. Dichos archivos proveen la forma de renderizar la aplicacion del lado del servidor.<br/><br/>
+
+Por fuera de /server, esta el archivo de testeo `requests.hurl`, `docker-compose.yml` encargado de maquetar como se debe conteinearizar el programa entero y el archivo con los comandos que levantan la aplicación `makefile`.
 
 ## Como ejecutar la aplicación
 
@@ -37,14 +39,14 @@ docker version
 En caso de no tener una respecta satisfactoria, se puede instalar la herramienta desde su pagina [oficial](https://docs.docker.com/engine/install/) siguiendo las instrucciones correspondientes a su sistema operativo.
 
 ### Ejecutar la aplicación
-Ahora con el lenguaje y herramienta instalados ya podemos ejecutar la aplicación. Se provee un archivo ejecutable llamado runtest.sh, todo lo que se debe hacer para montar y empezar a usar es ejecutar dicho archivo:
+Ahora con el lenguaje y herramienta instalados ya podemos ejecutar la aplicación. Se provee un archivo llamado makefile, todo lo que se debe hacer para montar y empezar a usar es usar el siguiente comando:
 ```
-./runtest.sh
+make
 ```
 Con la iniciación correcta, se muestra todo el proceso de montado y testeo. Para ver el proyecto en el navegador solo se debe clickear en el link generado al final del proyecto.
 
 ### Detener la aplicación
-Para apagar el servidor, solo se debe clickear en la terminal nuevamente y usar siguiente comando, que dentendrá y eliminará lo generado al iniciar el ejecutable:
+Para apagar el servidor, solo se debe clickear en la terminal nuevamente y usar siguiente comando, que dentendrá y eliminará lo generado en docker:
 ```
-docker compose down -v
+make off
 ```

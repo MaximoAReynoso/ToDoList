@@ -1,4 +1,4 @@
-all: sqlc templ build imagen levantar fin
+all: sqlc templ build imagen levantar test fin
 
 sqlc:
 	@printf "Aplicando sqlc...\n"
@@ -30,6 +30,11 @@ levantar:
 	@printf "Docker levantado.\n"
 	@printf "Espere 20 segundos a que la base de datos termine de iniciar...\n\n\n"
 	@sleep 20
+
+test:
+	@echo "Realizando pruebas...\n"
+	@hurl --test requests.hurl
+	@echo "Pruebas realizadas exitosamente.\n\n\n"
 
 fin:
 	@printf "Recursos cargados exitosamente, puede seguir usando la aplicacion.\n"
