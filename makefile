@@ -1,9 +1,15 @@
-all: sqlc build imagen levantar fin
+all: sqlc templ build imagen levantar fin
 
 sqlc:
 	@printf "Aplicando sqlc...\n"
 	@cd server && sqlc generate
 	@printf "Sqlc generado.\n\n\n"
+	@sleep 2
+
+templ:
+	@printf "Compilando archivos templ...\n"
+	@cd server/views && templ generate
+	@printf "Archivos templ compilados.\n\n\n"
 	@sleep 2
 
 build:
