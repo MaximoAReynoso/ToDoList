@@ -53,7 +53,7 @@ func (s *Server) CreateTasks(w http.ResponseWriter, r *http.Request) {
 	title := r.FormValue("title")
 	description := r.FormValue("description")
 	completedText := r.FormValue("completed")
-	completed := completedText == "on"
+	completed := completedText == "true"
 
 	err = ValidateTask(title)
 	if err != nil {
@@ -71,7 +71,13 @@ func (s *Server) CreateTasks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.Redirect(w, r, "/", http.StatusSeeOther)
+	listadoCompleto, err := s.queries.ListTasks(r.Context())
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	views.Listado(listadoCompleto).Render(r.Context(), w)
 }
 
 // PUT /tasks/{id} - Actualizar elemento
@@ -107,5 +113,5 @@ func (s *Server) DeleteTask(w http.ResponseWriter, r *http.Request, id int) {
 
 	}
 
-	w.WriteHeader(http.StatusNoContent)
+	w.WriteHeader(http.StatusOK)
 }

@@ -2,6 +2,7 @@ package views
 
 import (
 	sqlc "example.com/server/db/sqlc"
+	"fmt"
 )
 
 templ Listado(tasks []sqlc.Task){
@@ -15,14 +16,8 @@ templ Listado(tasks []sqlc.Task){
 				} else {
 				    <p class="completada">No completado</p>
 				}
-				<button type="submit" class="botonBorrar" onclick={ templ.JSFuncCall("deleteTask", task.ID) }>Borrar</button>
+				<button type="submit" class="botonBorrar" hx-delete={ fmt.Sprintf("/tasks/%d", task.ID) } hx-target="closest div" hx-swap="outerHTML" hx-on="htmx:afterRequest: if(event.detail.successful) this.reset()">Borrar</button>
 			</div>
 		}
 	</div>
-	<script>
-    	async function deleteTask(id) {
-        	await fetch(`/tasks/${id}`, { method: 'DELETE' });
-        	location.reload();
-    	}
-    </script>
 }
