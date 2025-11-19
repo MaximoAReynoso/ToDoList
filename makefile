@@ -33,7 +33,7 @@ levantar:
 
 testear:
 	@printf "Realizando pruebas...\n"
-	@./requests.sh
+	@./req.sh
 	@printf "Puebas realizadas.\n\n\n"
 	@sleep 2
 
