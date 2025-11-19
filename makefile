@@ -1,5 +1,4 @@
-#all: sqlc templ build imagen levantar test fin
-all: sqlc templ build imagen levantar fin
+all: sqlc templ build imagen levantar testear fin
 
 sqlc:
 	@printf "Aplicando sqlc...\n"
@@ -32,10 +31,11 @@ levantar:
 	@printf "Espere 20 segundos a que la base de datos termine de iniciar...\n\n\n"
 	@sleep 20
 
-#test:
-#	@echo "Realizando pruebas...\n"
-#	@hurl --test requests.hurl
-#	@echo "Pruebas realizadas exitosamente.\n\n\n"
+testear:
+	@printf "Realizando pruebas...\n"
+	@./requests.sh
+	@printf "Puebas realizadas.\n\n\n"
+	@sleep 2
 
 fin:
 	@printf "Recursos cargados exitosamente, puede seguir usando la aplicacion.\n"

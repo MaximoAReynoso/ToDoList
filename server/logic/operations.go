@@ -100,15 +100,12 @@ func (s *Server) UpdateTask(w http.ResponseWriter, r *http.Request, id int) {
 
 // DELETE /tasks/{id} - Eliminar elemento
 func (s *Server) DeleteTask(w http.ResponseWriter, r *http.Request, id int) {
-	err := s.queries.DeleteTask(context.Background(), int32(id))
+	err := s.queries.DeleteTask(r.Context(), int32(id))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 
 	}
-
-	mu.Lock()
-	defer mu.Unlock()
 
 	w.WriteHeader(http.StatusNoContent)
 }
