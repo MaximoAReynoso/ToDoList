@@ -1,7 +1,7 @@
 package views
 
 templ Formulario(){
-	<form hx-post="/tasks" hx-target="#listaElementos" hx-swap="beforeend">
+	<form hx-post="/tasks" hx-target="#listaElementos" hx-swap="outerHTML">
         <div class="formBoxes">
             <p class="formText">Titulo</p>
             <input type="text" name="title" class="formInput" /><br />

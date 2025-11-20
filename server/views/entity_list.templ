@@ -5,18 +5,24 @@ import (
 	"fmt"
 )
 
+templ Boton(task sqlc.Task){
+	<p class="completada" id={ fmt.Sprintf("CompletadoN%d", task.ID) } hx-put={ fmt.Sprintf("/tasks/%d", task.ID) } hx-target={ fmt.Sprintf("#CompletadoN%d", task.ID) } hx-swap="outerHTML">
+		if task.Completed {
+			Completado
+		} else {
+			No Completado
+		}
+	</p>
+}
+
 templ Listado(tasks []sqlc.Task){
 	<div id="listaElementos" class="listaElementos">
 		for _, task := range tasks {
 			<div class="elementoDeLista">
 				<p class="titulo"> { task.Title } </p>
 				<p class="descripcion"> { task.Description } </p>
-				if task.Completed {
-				    <p class="completada">Completado</p>
-				} else {
-				    <p class="completada">No completado</p>
-				}
-				<button type="submit" class="botonBorrar" hx-delete={ fmt.Sprintf("/tasks/%d", task.ID) } hx-target="closest div" hx-swap="outerHTML" hx-on="htmx:afterRequest: if(event.detail.successful) this.reset()">Borrar</button>
+				@Boton(task)
+				<button type="submit" class="botonBorrar" hx-delete={ fmt.Sprintf("/tasks/%d", task.ID) } hx-target="closest div" hx-swap="outerHTML">Borrar</button>
 			</div>
 		}
 	</div>

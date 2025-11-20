@@ -126,7 +126,7 @@ form {
     padding: 1.6vh 2.4vh;
     margin: 2vh auto;
 
-    background-color: red;
+    background-color: blue;
     border: none;
     border-radius: 1vh;
 
@@ -134,5 +134,9 @@ form {
     font-weight: bold;
     color: white;
 
+    cursor: pointer;
+}
+
+.completada {
     cursor: pointer;
 }

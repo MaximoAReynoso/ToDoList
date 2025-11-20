@@ -8,7 +8,7 @@ SELECT * FROM task WHERE id = $1;
 SELECT * FROM task;
 
 -- name: UpdateTask :exec
-UPDATE task SET title = $2, description = $3 WHERE id = $1;
+UPDATE task SET title = $2, description = $3, completed = $4 WHERE id = $1;
 
 -- name: DeleteTask :exec
 DELETE FROM task WHERE id = $1;
